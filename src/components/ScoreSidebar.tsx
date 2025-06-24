@@ -59,10 +59,10 @@ const ScoreSidebar: React.FC<ScoreSidebarProps> = ({ isOpen, document }) => {
             <div className="flex items-center justify-center bg-gray-50 rounded-lg p-4 relative">
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-4xl font-bold text-primary-500">
-                  {Math.round(document.scores.overall)}
+                  {document.scores ? Math.round(document.scores.overall) : 0}
                 </div>
               </div>
-              <ScoreRadarChart scores={document.scores} />
+              {document.scores && <ScoreRadarChart scores={document.scores} />}
             </div>
           </div>
           

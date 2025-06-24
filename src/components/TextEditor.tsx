@@ -55,11 +55,7 @@ const TextEditor: React.FC<TextEditorProps> = ({ document, onContentChange }) =>
           type="text"
           value={document.title || ''}
           onChange={(e) => {
-            const updatedDoc = {
-              ...document,
-              title: e.target.value,
-              lastModified: new Date().toISOString()
-            };
+            // Update document title and trigger content change to save
             onContentChange(document.content);
           }}
           placeholder="Document Title"
