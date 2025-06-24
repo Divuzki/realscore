@@ -49,8 +49,8 @@ const TextEditor: React.FC<TextEditorProps> = ({ document, onContentChange }) =>
   ];
 
   return (
-    <div className="h-full flex flex-col p-4">
-      <div className="mb-4">
+    <div className="h-full flex flex-col p-2 sm:p-4">
+      <div className="mb-2 sm:mb-4">
         <input
           type="text"
           value={document.title || ''}
@@ -63,7 +63,7 @@ const TextEditor: React.FC<TextEditorProps> = ({ document, onContentChange }) =>
             onContentChange(document.content);
           }}
           placeholder="Document Title"
-          className="w-full text-2xl font-bold border-none focus:outline-none focus:ring-0 bg-transparent"
+          className="w-full text-xl sm:text-2xl font-bold border-none focus:outline-none focus:ring-0 bg-transparent"
         />
       </div>
       
@@ -80,11 +80,11 @@ const TextEditor: React.FC<TextEditorProps> = ({ document, onContentChange }) =>
         />
       </div>
       
-      <div className="flex items-center justify-between text-sm text-gray-500 mt-3">
-        <div>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm text-gray-500 mt-2 sm:mt-3 space-y-1 sm:space-y-0">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
           {document.content ? (
             <>
-              <span className="mr-3">
+              <span>
                 Words: {document.content.replace(/<[^>]*>/g, '').trim().split(/\s+/).filter(Boolean).length}
               </span>
               <span>

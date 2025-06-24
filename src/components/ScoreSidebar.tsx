@@ -21,7 +21,9 @@ const ScoreSidebar: React.FC<ScoreSidebarProps> = ({ isOpen, document }) => {
   const needsMoreContent = wordCount < minContentForAnalysis;
 
   return (
-    <aside className="w-80 bg-white border-l border-gray-200 fixed right-0 top-14 bottom-0 overflow-y-auto p-4 shadow-md transition-all duration-300 ease-in-out z-10">
+    <aside className={`w-full sm:w-80 bg-white border-l border-gray-200 fixed right-0 top-14 bottom-0 overflow-y-auto p-3 sm:p-4 shadow-md transition-all duration-300 ease-in-out z-30 ${
+      isOpen ? 'translate-x-0' : 'translate-x-full'
+    } lg:relative lg:top-0 lg:translate-x-0 lg:shadow-none lg:z-0`}>
       <h2 className="text-lg font-bold mb-4 text-primary-500">Analysis Dashboard</h2>
       
       {needsMoreContent ? (

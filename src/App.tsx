@@ -3,6 +3,7 @@ import Header from './components/Header';
 import TextEditor from './components/TextEditor';
 import ScoreSidebar from './components/ScoreSidebar';
 import ModelLoader from './components/ModelLoader';
+import MobileOverlay from './components/MobileOverlay';
 import { useDocumentStorage } from './hooks/useDocumentStorage';
 import { useTensorflowModels } from './hooks/useTensorflowModels';
 import { Document } from './types/Document';
@@ -111,29 +112,37 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header 
-        toggleSidebar={toggleSidebar} 
+      <Header
+        toggleSidebar={toggleSidebar}
         sidebarOpen={sidebarOpen}
         onNewDocument={handleNewDocument}
         currentDocument={currentDocument}
         documentsList={documentsList}
         onDocumentSelect={handleDocumentSelect}
       />
-      
-      <div className="flex flex-1 overflow-hidden">
+
+      <div className="flex flex-1 overflow-hidden relative">
         {currentDocument ? (
           <>
-            <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'mr-80' : 'mr-0'}`}>
-              <TextEditor 
-                document={currentDocument}
-                onContentChange={handleContentChange}
-              />
-            </main>
-            
-            <ScoreSidebar 
-              isOpen={sidebarOpen}
-              document={currentDocument}
+            <MobileOverlay 
+              isVisible={sidebarOpen} 
+              onClick={() => setSidebarOpen(false)} 
             />
+            
+            <main
+              className={`flex-1 transition-all duration-300 ${
+                sidebarOpen ? 'lg:mr-80 mr-0' : 'mr-0'
+              } bg-white overflow-y-auto p-2 sm:p-4`}
+            >
+              <div className="max-w-4xl mx-auto">
+                <TextEditor
+                  document={currentDocument}
+                  onContentChange={handleContentChange}
+                />
+              </div>
+            </main>
+
+            <ScoreSidebar isOpen={sidebarOpen} document={currentDocument} />
           </>
         ) : (
           <EmptyState onNewDocument={handleNewDocument} />
